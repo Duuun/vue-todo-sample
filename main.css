@@ -18,3 +18,9 @@ li span.done {
 li.done {
     background: #bbb;
 }
+.secondary-content {
+    margin-right: 10px;
+}
+.test {
+    color: red;
+}

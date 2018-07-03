@@ -1,8 +1,30 @@
+const likeComponent = Vue.extend({
+    props: {
+        message: {
+            type: String,
+            defalut: 'Like'
+        }
+    },
+    data: function () {
+        return {
+            count: 0
+        }
+    },
+    template: '<a href="#!" class="secondary-content" @click="countUp"> <i class="material-icons" style="color:lightpink;">star_border</i> {{ count }} </a>',
+    methods: {
+        countUp: function () {
+            this.count++;
+            this.$emit('increment');
+        }
+    }
+})
+
 new Vue({
     el: '#app',
     data: {
         newItem: '',
-        todos: []
+        todos: [],
+        total: 0
     },
     watch: {
         todos: {
@@ -11,6 +33,9 @@ new Vue({
             },
             deep: true
         }
+    },
+    components: {
+        'like-component': likeComponent
     },
     mounted: function () {
         this.todos = JSON.parse(localStorage.getItem('todos'));
@@ -28,6 +53,13 @@ new Vue({
             if (confirm('削除してもいいですか？')) {
                 this.todos.splice(index, 1);
             }
+        },
+        putStar: function (index) {
+            alert('test');
+            this.addClass('test');
+        },
+        incrementTotal: function () {
+            this.total++;
         }
     },
     computed: {
